@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+    mysql:
+        container_name: mysql-ulaval-web-secu
+        build: 
+            context: ${DB_PATH}
+        command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        restart: always
+        networks:
+            - ulaval-web-secu
+        ports:
+            - 3307:3306
+        expose:
+            - 3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+            MYSQL_DATABASE: ${DATABASE_NAME}
+
+    phpmyadmin:
+        container_name: phpmyadmin-ulaval-web-secu
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+            - mysql
+        ports:
+            - 82:80
+        environment:
+            PMA_HOST: mysql
+            UPLOAD_LIMIT: 1280M
+            MAX_EXECUTION_TIME: 0
+        networks:
+            - ulaval-web-secu
+        restart: always
+
+    # web:
+    #     container_name: web-ulaval-web-secu
+    #     build: 
+    #         context: ${WEB_PATH}
+    #     networks:
+    #         - ulaval-web-secu
+    #     env_file:
+    #         - ${INFRA_ROOT_PATH}/web/.env
+    #     volumes:
+    #         - ${WEB_PATH}:/web
+    #         - ${WEB_PATH}/node_modules:/web/node_modules
+    #     ports:
+    #         - 8081:3000
+    #     expose:
+    #         - 3000
+    
+    # api:
+    #     container_name: api-ulaval-web-secu
+    #     image: api-calendar-springboot
+    #     build: 
+    #         context: ${API_PATH}
+    #     depends_on:
+    #         - mysql
+    #         - phpmyadmin
+    #         # - web
+    #     networks:
+    #         - ulaval-web-secu
+    #     ports:
+    #         - 8080:8080
+    #     restart: always
+
+networks:
+    ulaval-web-secu:
