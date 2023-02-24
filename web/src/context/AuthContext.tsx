@@ -6,6 +6,7 @@ import axios from 'axios';
 interface AuthWrapperInterface {
     children: React.ReactNode;
 }
+
 interface AuthContextInterface {
     login: (username: string, password: string) => any;
     register: (email: string, password: string, username: string) => any;
@@ -16,6 +17,10 @@ interface AuthContextInterface {
     isLoading: boolean;
     isAdmin: boolean;
     isModerator: boolean;
+    returnMessage: string;
+    returnCode: number;
+    setReturnCode: (number: number) => any;
+    setReturnMessage: (message: string) => any;
 }
 
 const AuthContext = createContext({} as AuthContextInterface);
@@ -28,6 +33,8 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
     const [isLoading, setIsLoading] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
     const [isModerator, setIsModerator] = useState(false);
+    const [returnMessage, setReturnMessage] = useState("");
+    const [returnCode, setReturnCode] = useState(-1);
 
     useEffect(() => {
         console.log("useEffect");
@@ -112,19 +119,28 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 withCredentials: true
             }).then(response => {
                 if (response.data !== undefined) {
+                    console.log("test");
+                    setReturnMessage(response.data.message);
+                    setReturnCode(200)
                     setRoleOfUser(response.data.roles)
                     setCurrentUser(response.data);
-                    console.log("login", response.data)
-                    navigate("/dashboard");
+                    setTimeout(() => {
+                        navigate("/dashboard");
+                    }, 600);
                 } else {
-                    console.error("Error: response.json");
+                    setReturnMessage("Error: User not found.");
+                    setReturnCode(404)
                 }
             }).catch(error => {
                 console.error('Error:', error);
+                setReturnMessage("Error: User not found.");
+                setReturnCode(404)
             });
             setIsLoading(false);
         } catch (e: any) {
             console.log("error", e);
+            setReturnMessage("Error: User not found.");
+            setReturnCode(404)
             setIsLoading(false);
         }
     }
@@ -135,7 +151,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
         password: string,
         username: string
     ) => {
-        console.log("Call Register", email, password, username);
+        console.log("Call Register", username, email, password, username);
         try {
             setIsLoading(true);
             await axios({
@@ -150,18 +166,23 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                     "password": password,
                 }),
                 withCredentials: true
-            }).catch((err) => {
-                console.log("error", err);
-            }).then(async (response) => {
-                console.log("response", response);
-                if (response != undefined) {
-                    return 
+            }).then(response => {
+                console.log("res", response);
+                if (response.data !== undefined) {
+                    console.log("message", response.data.message);
+                    setReturnMessage(response.data.message);
+                    setReturnCode(200)
+                } else {
+                    setReturnMessage("error success");
+                    setReturnCode(400)
                 }
             });
             setIsLoading(false);
         } catch (e: any) {
-            console.log("error", e);
+            console.log("catch error", e);
             setIsLoading(false);
+            setReturnMessage(e.response.data.message);
+            setReturnCode(401)
         }
     };
 
@@ -206,6 +227,10 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 isLoading,
                 isAdmin,
                 isModerator,
+                returnMessage,
+                returnCode,
+                setReturnCode,
+                setReturnMessage
             }}
         >
             {children}

@@ -13,9 +13,9 @@ export default function InputField(props: ChildProps) {
     }
 
     return (
-        <div className="w-full mt-4 mb-4">
+        <div className="w-full">
             <p className="text-DMsans mb-2">{props.title}</p>
-            <input className="w-full h-[50px] pl-3 rounded-lg bg-[#ecf0f1]" type={props.type} placeholder={props.placeholder} onChange={handleChangeFieldValue} />
+            <input className="w-full text-sm h-[40px] pl-3 rounded-lg bg-[#202020]" type={props.type} placeholder={props.placeholder} onChange={handleChangeFieldValue} />
         </div>
     )
 }

@@ -1,13 +1,34 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: "DMsans";
+    src: url(./assets/fonts/DMSans-Regular.ttf);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+    font-family: "DMsansBold";
+    src: url(./assets/fonts/DMSans-Bold.ttf);
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url(./assets/fonts/Poppins-Regular.ttf);
+}
+
+h1 {
+    font-family: 'DMsansBold', sans-serif;
+    font-size: 70px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+}
+
+.red-linear-bg {
+    background: linear-gradient(90deg, #d92424 0%, #DF0000 100%);
 }
