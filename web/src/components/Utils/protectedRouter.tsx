@@ -11,7 +11,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect } from 'react';
 
 const ProtectedRouter = () => {
-    const { isAuthenticated, currentUser, isLoading } = useAuth();
+    const { isAuthenticated, currentUser } = useAuth();
     
     useEffect(() => {
         console.log("user", currentUser, isAuthenticated);

@@ -119,14 +119,11 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 withCredentials: true
             }).then(response => {
                 if (response.data !== undefined) {
-                    console.log("test");
+                    console.log("test", response.data);
                     setReturnMessage(response.data.message);
-                    setReturnCode(200)
-                    setRoleOfUser(response.data.roles)
+                    setReturnCode(200);
+                    setRoleOfUser(response.data.roles);
                     setCurrentUser(response.data);
-                    setTimeout(() => {
-                        navigate("/dashboard");
-                    }, 600);
                 } else {
                     setReturnMessage("Error: User not found.");
                     setReturnCode(404)
@@ -214,6 +211,13 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(false);
         }
     }
+
+    useEffect(() => {
+        console.log("currentUserUseEffect", currentUser);
+        if (currentUser) {
+            navigate("/dashboard");
+        }
+    }, [currentUser]);
 
     return (
         <AuthContext.Provider

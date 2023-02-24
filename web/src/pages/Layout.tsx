@@ -9,8 +9,8 @@ const Layout = () => {
     return (
         <>
             <nav className="w-full h-[80px] fixed z-10 flex justify-center items-start backdrop-blur-md">
-                <div className="w-[1400px] h-[80px]">
-                    <div className="h-full w-full flex flex-row justify-between items-center px-4">
+                <div className="w-[1100px] h-[80px]">
+                    <div className="h-full w-full flex flex-row justify-between items-center">
                         {location.pathname !== "/dashboard" &&
                             <Link to="/" className="w-full lg:w-[230px] flex justify-center items-center">
                                 <img className="w-[200px] lg:w-full" src="/images/logo.png" alt="Agenda Logo" />
