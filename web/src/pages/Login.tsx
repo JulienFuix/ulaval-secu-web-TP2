@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import InputField from "../components/Utils/input";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai";
 
 export default function Login() {
-    const { login, returnMessage, returnCode, setReturnCode, setReturnMessage } = useAuth();
+    const { login, returnMessage, returnCode, setReturnCode, setReturnMessage, isLoading, currentUser, isAuthenticated } = useAuth();
     const [valueUsername, setvalueUsername] = useState("");
     const [valuePassword, setvaluePassword] = useState("");
     const [warningMessage, setWarningMessage] = useState("");
+    const navigate = useNavigate();
 
     const handleChildUsername = (value: string) => {
         setvalueUsername(value);

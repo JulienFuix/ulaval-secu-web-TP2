@@ -3,6 +3,7 @@ import InputField from "../components/Utils/input";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { AiFillCloseCircle, AiFillCheckCircle } from "react-icons/ai";
+import validator from 'validator';
 
 export default function Register() {
     const { register, returnMessage, returnCode, setReturnCode, setReturnMessage } = useAuth();
@@ -50,7 +51,7 @@ export default function Register() {
     }
 
     const handleChildEmail = (value: string) => {
-        if (value.length < 50 && value.length > 0 && value.includes("@") && value.includes(".")) {
+        if (value.length < 50 && value.length > 0 && validator.isEmail(value)) {
             setValidityEmail(true);
         } else {
             setValidityEmail(false);

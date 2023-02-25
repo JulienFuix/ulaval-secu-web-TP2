@@ -21,6 +21,7 @@ interface AuthContextInterface {
     returnCode: number;
     setReturnCode: (number: number) => any;
     setReturnMessage: (message: string) => any;
+    // userData: User;
 }
 
 const AuthContext = createContext({} as AuthContextInterface);
@@ -35,6 +36,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
     const [isModerator, setIsModerator] = useState(false);
     const [returnMessage, setReturnMessage] = useState("");
     const [returnCode, setReturnCode] = useState(-1);
+    // const [userData, setUserData] = useState<User | any>(undefined);
 
     useEffect(() => {
         console.log("useEffect");
@@ -76,15 +78,13 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                         console.log("autologin", response.data);
                         setCurrentUser(response.data);
                         setRoleOfUser(response.data.roles);
-                        setIsLoading(false);
-                        if (location.pathname == "/login" || location.pathname == "/register") {
+                        if (location.pathname == "/login" || location.pathname == "/register" || location.pathname == "/") {
                             navigate("/dashboard");
                         }
                     } else {
                         console.log("remove user");
                         navigate("/login");
                         setCurrentUser(undefined);
-                        setIsLoading(false);
                     }
                 } else {
                     navigate("/");
@@ -124,6 +124,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                     setReturnCode(200);
                     setRoleOfUser(response.data.roles);
                     setCurrentUser(response.data);
+                    navigate("/dashboard");
                 } else {
                     setReturnMessage("Error: User not found.");
                     setReturnCode(404)
@@ -212,13 +213,6 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
         }
     }
 
-    useEffect(() => {
-        console.log("currentUserUseEffect", currentUser);
-        if (currentUser) {
-            navigate("/dashboard");
-        }
-    }, [currentUser]);
-
     return (
         <AuthContext.Provider
             value={{
@@ -234,7 +228,8 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 returnMessage,
                 returnCode,
                 setReturnCode,
-                setReturnMessage
+                setReturnMessage,
+                // userData
             }}
         >
             {children}
