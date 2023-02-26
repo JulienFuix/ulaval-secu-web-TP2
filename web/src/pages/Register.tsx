@@ -75,16 +75,21 @@ export default function Register() {
     useEffect(() => {
         setReturnCode(-1)
         setReturnMessage("")
+        setWarningMessage("");
     }, []);
 
     useEffect(() => {
-        setWarningMessage(returnMessage);
         if (returnCode === 200) {
+            setWarningMessage(returnMessage);
             setTimeout(() => {
                 setWarningMessage("");
                 setReturnMessage("");
                 setReturnCode(-1);
             }, 3000);
+        } else if (returnCode === 404) {
+            setWarningMessage(returnMessage);
+        } else {
+            setWarningMessage("");
         }
     }, [returnCode]);
 

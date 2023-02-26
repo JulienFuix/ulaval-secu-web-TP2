@@ -7,7 +7,7 @@ import ModifyProfilPopUp from "../components/PopUp/ModifyProfilPopUp";
 import ModifyTeamPopUp from "../components/PopUp/ModifyTeamPopUp";
 
 const Layout = () => {
-    const { logout, currentUser, isLoading, isAuthenticated } = useAuth();
+    const { currentUser, isLoading, isAuthenticated } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
     const [displayModify, setDisplayModify] = useState(false);
@@ -27,7 +27,6 @@ const Layout = () => {
                         {location.pathname !== "/login" && location.pathname !== "/register" && location.pathname !== "/" &&
                             <div>
                                 <div className="flex flex-row">
-                                    {/* <button onClick={() => logout()}>Log Out</button> */}
                                     <button onClick={() => !displayModify ? (setDisplayModify(true), setDisplayTeam(false)) : setDisplayModify(false)} className={`${displayModify ? "bg-[#303030]" : ""} w-[103px] py-2 rounded-md bg-[#202020] flex flex-row mr-4 items-center justify-center`}><FaUser className="mr-2"/>Profil</button>
                                     <button onClick={() => !displayTeam ? (setDisplayTeam(true), setDisplayModify(false)) : setDisplayTeam(false)} className={`${displayTeam ? "bg-[#303030]" : ""} w-[117px] py-2 rounded-md bg-[#202020] flex flex-row mr-4 items-center justify-center`}><FaUsers size={23} className="mr-2"/>Team</button>
                                     {currentUser?.right === "ROLE_ADMIN" && <button onClick={() => navigate("/administration")} className="px-5 py-2 rounded-md bg-[#202020] flex flex-row items-center"><FaGavel className="mr-2"/>Administration</button>}

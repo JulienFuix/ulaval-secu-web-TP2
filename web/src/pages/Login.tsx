@@ -32,15 +32,17 @@ export default function Login() {
     useEffect(() => {
         setReturnCode(-1)
         setReturnMessage("")
+        setWarningMessage("")
     }, []);
 
     useEffect(() => {
         console.log("code", returnCode);
         if (returnCode === 200) {
             setWarningMessage("Success: User was successfully found.");
-        }
-        if (returnCode === 404) {
+        } else if (returnCode === 404) {
             setWarningMessage(returnMessage);
+        } else {
+            setWarningMessage("");
         }
     }, [returnCode])
 
