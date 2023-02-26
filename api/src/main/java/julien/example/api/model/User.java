@@ -12,7 +12,6 @@ import java.util.Set;
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
         @UniqueConstraint(columnNames = "email"),
-        @UniqueConstraint(columnNames = "userRight"),
 })
 public class User {
     @Id

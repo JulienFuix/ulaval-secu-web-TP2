@@ -36,3 +36,7 @@ body {
 .white-drop-shadow {
     filter: drop-shadow(10px 10px 100px rgba(255, 255, 255, 0.25));
 }
+
+.white-drop-shadow-modale {
+    box-shadow: 2px 2px 50px rgba(86, 86, 86, 0.25);
+}
