@@ -15,13 +15,10 @@ interface AuthContextInterface {
     currentUser: undefined | User;
     isAuthenticated: boolean;
     isLoading: boolean;
-    isAdmin: boolean;
-    isModerator: boolean;
     returnMessage: string;
     returnCode: number;
     setReturnCode: (number: number) => any;
     setReturnMessage: (message: string) => any;
-    // userData: User;
 }
 
 const AuthContext = createContext({} as AuthContextInterface);
@@ -32,11 +29,8 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
     const [currentUser, setCurrentUser] = useState<undefined | User>(undefined);
     const [err, setErr] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const [isAdmin, setIsAdmin] = useState(false);
-    const [isModerator, setIsModerator] = useState(false);
     const [returnMessage, setReturnMessage] = useState("");
     const [returnCode, setReturnCode] = useState(-1);
-    // const [userData, setUserData] = useState<User | any>(undefined);
 
     useEffect(() => {
         console.log("useEffect");
@@ -47,15 +41,22 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
         roles.map((role: any, index: number) => {
             switch(role) {
                 case "ROLE_ADMIN":
-                    setIsAdmin(true);
+                    setCurrentUser(prevUser => ({
+                        ...prevUser,
+                        role: "ROLE_ADMIN"
+                    }));
                     break;
                 case "ROLE_MODERATOR":
-                    setIsAdmin(true);
-                    setIsModerator(true);
+                    setCurrentUser(prevUser => ({
+                        ...prevUser,
+                        role: "ROLE_MODERATOR"
+                    }));
                     break;
                 default:
-                    setIsAdmin(false);
-                    setIsModerator(false);
+                    setCurrentUser(prevUser => ({
+                        ...prevUser,
+                        role: "ROLE_USER"
+                    }));
             }
         });
     };
@@ -200,8 +201,6 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 console.log(err);
             }).then(async () => {
                 console.log("Log out");
-                setIsAdmin(false);
-                setIsModerator(false);
                 setCurrentUser(undefined);
                 setErr(false);
                 navigate("/");
@@ -223,13 +222,10 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
                 logout,
                 isAuthenticated: currentUser ? true : false,
                 isLoading,
-                isAdmin,
-                isModerator,
                 returnMessage,
                 returnCode,
                 setReturnCode,
                 setReturnMessage,
-                // userData
             }}
         >
             {children}

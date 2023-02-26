@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export function Protected<T>(WrappedComponent: React.ComponentType<T>) {
@@ -12,10 +12,9 @@ export function Protected<T>(WrappedComponent: React.ComponentType<T>) {
         useEffect(() => {
             console.log("Protected", isLoading);
             if (!isLoading) {
-                console.log("isAuth", isAuthenticated);
                 if (!isAuthenticated) {
                     navigate("/");
-                } else if ((location.pathname == "/login" || location.pathname == "/register") && isAuthenticated) {
+                } else if ((location.pathname == "/login" || location.pathname == "/register" || location.pathname == "/") && isAuthenticated) {
                     navigate("/dashboard");
                 } else {
                     setLoaded(true);

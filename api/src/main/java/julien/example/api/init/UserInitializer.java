@@ -46,7 +46,7 @@ public class UserInitializer {
     @PostConstruct
     public void initModo() {
         if (userRepository.findByUsername(modoUsername).isEmpty()) {
-            User usermodo = new User(modoUsername, modoEmail, encoder.encode(modoPassword));
+            User usermodo = new User(modoUsername, modoEmail, encoder.encode(modoPassword), "ROLE_MODERATOR");
             Set<Role> rolesModo = new HashSet<>();
             Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -56,7 +56,7 @@ public class UserInitializer {
             userRepository.save(usermodo);
         }
         if (userRepository.findByUsername(adminUsername).isEmpty()) {
-            User useradmin = new User(adminUsername, adminEmail, encoder.encode(adminPassword));
+            User useradmin = new User(adminUsername, adminEmail, encoder.encode(adminPassword), "ROLE_ADMIN");
             Set<Role> rolesAdmin = new HashSet<>();
             Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));

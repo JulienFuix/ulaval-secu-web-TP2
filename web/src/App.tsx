@@ -7,7 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import NoPage from "./pages/NoPage";
-import Protected from './components/Protected/protected';
+import AdminPanel from './pages/AdminPanel';
+import ModoPanel from './pages/ModoPanel';
 
 function App() {
     return (
@@ -18,6 +19,8 @@ function App() {
                     <Route path="login" element={<Login />} />
                     <Route path="register" element={<Register />} />
                     <Route path="dashboard" element={<Dashboard />} />
+                    <Route path="administration" element={<AdminPanel />} />
+                    <Route path="moderation" element={<ModoPanel />} />
                     <Route path="*" element={<NoPage />} />
                 </Route>
             </Routes>

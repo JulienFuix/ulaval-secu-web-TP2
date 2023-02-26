@@ -11,7 +11,8 @@ import java.util.Set;
 @Entity
 @Table(name = "users", uniqueConstraints = {
         @UniqueConstraint(columnNames = "username"),
-        @UniqueConstraint(columnNames = "email")
+        @UniqueConstraint(columnNames = "email"),
+        @UniqueConstraint(columnNames = "userRight"),
 })
 public class User {
     @Id
@@ -31,6 +32,10 @@ public class User {
     @Size(max = 120)
     private String password;
 
+    @NotBlank
+    @Size(max = 120)
+    private String userRight;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -40,10 +45,11 @@ public class User {
     public User() {
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String right) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.userRight = right;
     }
 
     public Long getId() {
@@ -84,5 +90,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserRight() {
+        return userRight;
+    }
+
+    public void setUserRight(String right) {
+        this.userRight = right;
     }
 }

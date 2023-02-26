@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Protected from "../components/Protected/protected";
 
-export default function Home() {
+function Home() {
     return (
         <div className="w-full flex justify-center disable-scroll-bar">
             <div className="w-[1100px] h-[calc(100vh-80px)] mt-[80px] px-4">
@@ -24,3 +25,5 @@ export default function Home() {
         </div>
     );
 }
+
+export default Home;

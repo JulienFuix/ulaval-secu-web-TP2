@@ -90,6 +90,7 @@ public class AuthController {
                         user.getId(),
                         user.getUsername(),
                         user.getEmail(),
+                        user.getUserRight(),
                         rolesString));
             } else if (Objects.equals(tokenIsValid, "expired")) {
                 System.out.print("Le token est expiré\n");
@@ -123,6 +124,7 @@ public class AuthController {
                             .body(new UserInfoResponse(user.getId(),
                                     user.getUsername(),
                                     user.getEmail(),
+                                    user.getUserRight(),
                                     rolesString));
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -164,6 +166,7 @@ public class AuthController {
                 .body(new UserInfoResponse(userDetails.getId(),
                         userDetails.getUsername(),
                         userDetails.getEmail(),
+                        userDetails.getUserRight(),
                         roles));
     }
 
@@ -179,7 +182,8 @@ public class AuthController {
 
         User user = new User(signupRequest.getUsername(),
                 signupRequest.getEmail(),
-                encoder.encode(signupRequest.getPassword()));
+                encoder.encode(signupRequest.getPassword()),
+                "ROLE_USER");
 
         Set<String> strRoles = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
