@@ -32,21 +32,21 @@ services:
             - ulaval-web-secu
         restart: always
 
-    web:
-        container_name: web-ulaval-web-secu
-        build: 
-            context: ${WEB_PATH}
-        networks:
-            - ulaval-web-secu
-        env_file:
-            - ${INFRA_ROOT_PATH}/web/.env
-        volumes:
-            - ${WEB_PATH}:/web
-            - ${WEB_PATH}/node_modules:/web/node_modules
-        ports:
-            - 8081:3000
-        expose:
-            - 3000
+    # web:
+    #     container_name: web-ulaval-web-secu
+    #     build: 
+    #         context: ${WEB_PATH}
+    #     networks:
+    #         - ulaval-web-secu
+    #     env_file:
+    #         - ${INFRA_ROOT_PATH}/web/.env
+    #     volumes:
+    #         - ${WEB_PATH}:/web
+    #         - ${WEB_PATH}/node_modules:/web/node_modules
+    #     ports:
+    #         - 8081:3000
+    #     expose:
+    #         - 3000
     
     api:
         container_name: api-ulaval-web-secu
