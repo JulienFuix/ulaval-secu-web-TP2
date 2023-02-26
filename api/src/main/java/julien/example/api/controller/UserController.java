@@ -17,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:8081", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "http://ulaval.julienfuix.com", maxAge = 3600, allowCredentials = "true")
 @RestController
 @PreAuthorize("hasRole('USER') or hasRole('ADMIN') or hasRole('MODERATOR')")
 @RequestMapping("/api/user")
