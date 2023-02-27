@@ -67,7 +67,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'http://localhost:8080/api/auth/autologin',
+                url: 'http://108.175.1.139:8080/api/auth/autologin',
                 headers: { 'Content-Type': 'application/json', },
                 data: "",
                 withCredentials: true
@@ -109,7 +109,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'http://localhost:8080/api/auth/signin',
+                url: 'http://108.175.1.139:8080/api/auth/signin',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -155,7 +155,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'http://localhost:8080/api/auth/signup',
+                url: 'http://108.175.1.139:8080/api/auth/signup',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -191,7 +191,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'http://localhost:8080/api/auth/signout',
+                url: 'http://108.175.1.139:8080/api/auth/signout',
                 headers: {
                     'Content-Type': 'application/json',
                 },
