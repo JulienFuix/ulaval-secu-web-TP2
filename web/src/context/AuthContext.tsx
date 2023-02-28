@@ -31,6 +31,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
     const [isLoading, setIsLoading] = useState(true);
     const [returnMessage, setReturnMessage] = useState("");
     const [returnCode, setReturnCode] = useState(-1);
+    const uri = "https://localhost:8443"
 
     useEffect(() => {
         console.log("useEffect");
@@ -67,7 +68,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'https://108.175.1.139:8443/api/auth/autologin',
+                url: uri + '/api/auth/autologin',
                 headers: { 'Content-Type': 'application/json', },
                 data: "",
                 withCredentials: true
@@ -109,7 +110,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'https://108.175.1.139:8443/api/auth/signin',
+                url: uri + '/api/auth/signin',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -155,7 +156,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'https://108.175.1.139:8443/api/auth/signup',
+                url: uri + '/api/auth/signup',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -191,7 +192,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
             setIsLoading(true);
             await axios({
                 method: 'post',
-                url: 'https://108.175.1.139:8443/api/auth/signout',
+                url: uri + '/api/auth/signout',
                 headers: {
                     'Content-Type': 'application/json',
                 },
