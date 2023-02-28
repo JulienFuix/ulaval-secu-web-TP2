@@ -59,7 +59,7 @@ services:
         networks:
             - ulaval-web-secu
         ports:
-            - 8080:8080
+            - 8443:8443
         restart: always
 
 networks:
