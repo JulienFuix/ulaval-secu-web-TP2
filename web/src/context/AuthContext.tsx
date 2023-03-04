@@ -31,7 +31,7 @@ export const AuthWrapper = ({ children }: AuthWrapperInterface) => {
     const [isLoading, setIsLoading] = useState(true);
     const [returnMessage, setReturnMessage] = useState("");
     const [returnCode, setReturnCode] = useState(-1);
-    const uri = "https://108.175.1.139:8443"
+    const uri = "http://108.175.1.139:8443"
 
     useEffect(() => {
         console.log("useEffect");
