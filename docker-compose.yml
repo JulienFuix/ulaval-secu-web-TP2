@@ -48,19 +48,19 @@ services:
     #     expose:
     #         - 3000
     
-    api:
-        container_name: api-ulaval-web-secu
-        image: api-calendar-springboot
-        build: 
-            context: ${API_PATH}
-        depends_on:
-            - mysql
-            - phpmyadmin
-        networks:
-            - ulaval-web-secu
-        ports:
-            - 8443:8443
-        restart: always
+    # api:
+    #     container_name: api-ulaval-web-secu
+    #     image: api-calendar-springboot
+    #     build: 
+    #         context: ${API_PATH}
+    #     depends_on:
+    #         - mysql
+    #         - phpmyadmin
+    #     networks:
+    #         - ulaval-web-secu
+    #     ports:
+    #         - 8443:8443
+    #     restart: always
 
 networks:
     ulaval-web-secu:
