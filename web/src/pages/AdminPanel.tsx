@@ -8,7 +8,7 @@ function AdminPanel() {
     return (
         <div className="w-full flex justify-center disable-scroll-bar">
             <div className="w-[1100px] h-[calc(100vh-80px)] mt-[80px]">
-                Admin Panel
+                <h1 className="mt-10">Admin Panel</h1>
                 <p>{currentUser.role}</p>
             </div>
         </div>
