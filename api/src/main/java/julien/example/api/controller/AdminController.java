@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-@CrossOrigin(origins = "https://ulaval.julienfuix.com", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin(origins = "http://ulaval.julienfuix.com", maxAge = 3600, allowCredentials = "true")
 @RestController
 @PreAuthorize("hasRole('ADMIN') or hasRole('MODERATOR')")
 @RequestMapping("/api/admin")
